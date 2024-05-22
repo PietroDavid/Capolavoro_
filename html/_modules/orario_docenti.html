@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+
+<html lang="it" data-content_root="../">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>orario_docenti &#8212; Gest_Orario 0.1 documentazione</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=d1102ebc" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css?v=12dfc556" />
+    <script src="../_static/documentation_options.js?v=41f723b1"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/translations.js?v=0173e136"></script>
+    <link rel="index" title="Indice" href="../genindex.html" />
+    <link rel="search" title="Cerca" href="../search.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+
+  
+  
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Codice sorgente per orario_docenti</h1><div class="highlight"><pre>
+<span></span><span class="n">SEP</span> <span class="o">=</span> <span class="s2">&quot;,&quot;</span>
+
+<span class="n">giorni_sett</span><span class="o">=</span><span class="p">{</span>
+        <span class="s2">&quot;lunedì&quot;</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="s2">&quot;martedì&quot;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s2">&quot;mercoledì&quot;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+        <span class="s2">&quot;giovedì&quot;</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s2">&quot;venerdì&quot;</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+        <span class="p">}</span>
+
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;OrarioTabellaGlobale.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span>
+<div class="viewcode-block" id="docenti_classe">
+<a class="viewcode-back" href="../docs/orario_docenti.html#orario_docenti.docenti_classe">[documenti]</a>
+<span class="k">def</span> <span class="nf">docenti_classe</span><span class="p">(</span><span class="n">classe</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    </span>
+<span class="sd">    Genera il file docenti_classe.txt che contiene l&#39;elenco dei docenti di una classe</span>
+<span class="sd">   </span>
+<span class="sd">        Parametri:</span>
+<span class="sd">            classe (string): 3 caratteri - classe di cui si vuole l&#39;elenco dei docenti</span>
+<span class="sd">                         es: 2LE</span>
+<span class="sd">   </span>
+<span class="sd">   </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">file_ot</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;docenti_classe.txt&quot;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    <span class="n">riga</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="k">while</span> <span class="n">riga</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">riga</span> <span class="o">=</span> <span class="n">riga</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">SEP</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">riga</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">classe</span><span class="p">:</span>
+                <span class="n">docente</span> <span class="o">=</span> <span class="n">riga</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span>
+                <span class="n">file_ot</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">docente</span><span class="p">)</span>
+                <span class="k">break</span>
+        
+        
+        <span class="n">riga</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    
+    <span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+    <span class="n">file_ot</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+               
+
+
+
+<div class="viewcode-block" id="orario_docente">
+<a class="viewcode-back" href="../docs/orario_docenti.html#orario_docenti.orario_docente">[documenti]</a>
+<span class="k">def</span> <span class="nf">orario_docente</span><span class="p">(</span><span class="n">docente</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Genera il file orario_docente.txt che contiene l&#39;orario di un docente</span>
+<span class="sd">   </span>
+<span class="sd">        Parametri:</span>
+<span class="sd">            docente (string): il nome del docente del quale si vuole l&#39;orario</span>
+<span class="sd">                         es: ADAMOLI PAOLO</span>
+<span class="sd">   </span>
+<span class="sd">   </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    <span class="n">file_ot</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;orario_docente.txt&quot;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    
+    <span class="n">riga</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">file_ot</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">riga</span><span class="p">)</span>
+    <span class="n">riga</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">file_ot</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">riga</span><span class="p">)</span>
+    
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="n">riga</span><span class="o">=</span><span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    
+    <span class="k">while</span> <span class="n">riga</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">riga_letta</span> <span class="o">=</span> <span class="n">riga</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">SEP</span><span class="p">)</span>
+        <span class="n">docente_letto</span> <span class="o">=</span> <span class="n">riga_letta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="n">docente_letto</span> <span class="o">==</span> <span class="n">docente</span><span class="p">:</span>
+            <span class="n">file_ot</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">riga</span><span class="p">)</span>
+            
+            <span class="k">for</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="n">riga_letta</span><span class="p">:</span>
+                <span class="n">ore</span> <span class="o">=</span> <span class="n">elemento</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                
+                <span class="k">if</span> <span class="n">ore</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span> <span class="ow">and</span> <span class="n">ore</span> <span class="o">!=</span> <span class="n">docente_letto</span><span class="p">:</span>
+                    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="n">riga</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="n">file_ot</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="n">file_ot</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+    
+    
+    
+<div class="viewcode-block" id="ore_disponibili_docente">
+<a class="viewcode-back" href="../docs/orario_docenti.html#orario_docenti.ore_disponibili_docente">[documenti]</a>
+<span class="k">def</span> <span class="nf">ore_disponibili_docente</span><span class="p">(</span><span class="n">nome</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Genera il file ore_libere_docente.txt che contiene il numero di ore che il docente ha a disposizione (D)</span>
+<span class="sd">   </span>
+<span class="sd">        Parametri:</span>
+<span class="sd">            docente (string): il nome del docente del quale si vuole conoscere le ore disponibili</span>
+<span class="sd">                         es: ADAMOLI PAOLO</span>
+<span class="sd">   </span>
+<span class="sd">   </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    
+    <span class="n">file_ot</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;ore_libere_docente.txt&quot;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    
+    <span class="n">riga</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    
+    <span class="k">while</span> <span class="n">riga</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">riga_letta</span> <span class="o">=</span> <span class="n">riga</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">SEP</span><span class="p">)</span>
+        <span class="n">docente_letto</span> <span class="o">=</span> <span class="n">riga_letta</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+        
+        <span class="k">if</span> <span class="n">docente_letto</span> <span class="o">==</span> <span class="n">nome</span><span class="p">:</span>
+            
+            <span class="k">for</span> <span class="n">elemento</span> <span class="ow">in</span> <span class="n">riga_letta</span><span class="p">:</span>
+                <span class="n">ore</span> <span class="o">=</span> <span class="n">elemento</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+                
+                <span class="k">if</span> <span class="n">ore</span> <span class="o">==</span> <span class="s2">&quot;D&quot;</span> <span class="p">:</span>
+                    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        
+        <span class="n">riga</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="n">file_ot</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">count</span><span class="p">)</span></div>
+
+    
+    
+    
+
+    
+    
+
+
+<div class="viewcode-block" id="lezioni_docente_ora_giorno">
+<a class="viewcode-back" href="../docs/orario_docenti.html#orario_docenti.lezioni_docente_ora_giorno">[documenti]</a>
+<span class="k">def</span> <span class="nf">lezioni_docente_ora_giorno</span><span class="p">(</span><span class="n">giorno</span><span class="p">,</span><span class="n">ora</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;</span>
+<span class="sd">    Genera il file lezione_in_ora.txt che contiene i docenti che hanno lezione in una determinata ora di un determinato giorno</span>
+<span class="sd">   </span>
+<span class="sd">        Parametri:</span>
+<span class="sd">            giorno (string): giorno di cui si vuole sapere l&#39;orario di una certa ora</span>
+<span class="sd">                         es: lunedì</span>
+<span class="sd">            </span>
+<span class="sd">            ora (int): l&#39;ora di cui si vuole sapere quali docenti hanno lezione</span>
+<span class="sd">                         es: 2</span>
+<span class="sd">   </span>
+<span class="sd">   </span>
+<span class="sd">    &#39;&#39;&#39;</span>
+    
+    <span class="n">file_ot</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;lezione_in_ora.txt&quot;</span><span class="p">,</span><span class="s2">&quot;w&quot;</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">pos</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span> <span class="o">*</span> <span class="n">giorni_sett</span><span class="p">[</span><span class="n">giorno</span><span class="p">])</span> <span class="o">+</span> <span class="n">ora</span> 
+    <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span>
+    <span class="n">riga</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    
+    <span class="k">while</span> <span class="n">riga</span> <span class="o">!=</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
+        <span class="n">riga</span><span class="o">=</span><span class="n">riga</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">SEP</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">riga</span><span class="p">[</span><span class="n">pos</span><span class="p">]</span> <span class="o">!=</span>  <span class="s2">&quot;   &quot;</span><span class="p">:</span>
+            <span class="n">file_ot</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">riga</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">riga</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">count</span><span class="p">)</span>
+    <span class="n">file_ot</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">count</span><span class="p">)</span></div>
+
+    
+       
+       
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">Gest_Orario</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigazione</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Codice del modulo</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<search id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Ricerca veloce</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Vai" />
+    </form>
+    </div>
+</search>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &#169;2024, David_Pietro-Pernigotti_Alessio.
+      
+      |
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 7.3.7</a>
+      &amp; <a href="https://alabaster.readthedocs.io">Alabaster 0.7.16</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

@@ -1,0 +1,7 @@
+orario\_docenti module
+======================
+
+.. automodule:: orario_docenti
+   :members:
+   :undoc-members:
+   :show-inheritance:
